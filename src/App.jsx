@@ -22,7 +22,12 @@ function DernierMessage({ person }) {
 }
 
 function Ecrire() {
-  return <input type="text" placeholder="Taper réponse" />;
+  return (
+  <div>
+  <input type="text" placeholder="Taper réponse" />
+  <button>Envoyer</button>
+  </div>
+)
 }
 
 export default function App() {
