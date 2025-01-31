@@ -2,7 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { people } from "./people.jsx";
+import { people } from "./data.jsx";
 import { getImageUrl } from "./utils.jsx";
 
 const anna = {
@@ -25,8 +25,7 @@ function Discussion({ person }) {
 
 function DernierMessage({ person }) {
   return (
-    <div
-    onClick={Discussion}>
+    <div onClick={Discussion}>
       {person.name}
       <br />
       <img src={person.pic} width="200" alt={person.name} />
@@ -43,15 +42,25 @@ function Ecrire() {
 export default function App() {
   const [selectedPerson, setSelectedPerson] = useState(jean);
 
+  const listPerson = people.map((person) => (
+    <li key={person.id}>
+      <button onClick={Discussion}>
+        <img src={getImageUrl(person)} alt={person.name} />
+        <p>
+          <b>{person.name}</b>
+          <p>{person.last}</p>
+        </p>
+      </button>
+    </li>
+  ));
+
   return (
     <>
-      <div class="messages">
+      <div className="messages">
         <h1>Messages</h1>
-        <DernierMessage person={anna} />
-        <br />
-        <DernierMessage person={jean} />
+        {listPerson}
       </div>
-      <div class="Discussion">
+      <div className="Discussion">
         <Discussion person={selectedPerson} />
         <Ecrire />
       </div>
@@ -59,4 +68,3 @@ export default function App() {
     </>
   );
 }
-
