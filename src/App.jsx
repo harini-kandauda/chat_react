@@ -40,11 +40,11 @@ function Ecrire() {
 }
 
 export default function App() {
-  const [selectedPerson, setSelectedPerson] = useState(jean);
+  const [selectedPerson, setSelectedPerson] = useState(anna);
 
   const listPerson = people.map((person) => (
     <li key={person.id}>
-      <button onClick={Discussion}>
+      <button onClick={() => setSelectedPerson(person)}>
         <img src={getImageUrl(person)} alt={person.name} />
         <p>
           <b>{person.name}</b>
