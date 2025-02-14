@@ -1,34 +1,25 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useContext } from "react";
 import "./App.css";
 import { people } from "./data.jsx";
 import { getImageUrl } from "./utils.jsx";
+import { ChatProvider, useChat } from "./ChatProvider.jsx";
+import Ecrire from "./Ecrire.jsx";
 
 function Discussion({ person }) {
   return <h1>{person.name}</h1>;
 }
 
-function DernierMessage({ person }) {
-  return (
-    <div onClick={Discussion}>
-      {person.name}
-      <br />
-      <img src={person.pic} width="200" alt={person.name} />
-      <br />
-      {person.last}
-    </div>
-  );
-}
-
-function Ecrire() {
-  return (
-  <div>
-  <input type="text" placeholder="Taper réponse" />
-  <button>Envoyer</button>
-  </div>
-)
-}
+// function DernierMessage({ person }) {
+//   return (
+//     <div onClick={Discussion}>
+//       {person.name}
+//       <br />
+//       <img src={person.pic} width="200" alt={person.name} />
+//       <br />
+//       {person.last}
+//     </div>
+//   );
+// }
 
 export default function App() {
   const [selectedPerson, setSelectedPerson] = useState(people[0]);
@@ -46,7 +37,8 @@ export default function App() {
   ));
 
   return (
-    <>
+    <ChatProvider>
+      <div style={{display:"flex"}}>
       <div className="messages">
         <h1>Messages</h1>
         {listPerson}
@@ -58,7 +50,10 @@ export default function App() {
         ))}
         <Ecrire />
       </div>
-      <p className="copyright">Made by Harini</p>
-    </>
+      {/* <p className="copyright">Made by Harini</p> */}
+        </div>
+    </ChatProvider>
   );
 }
+
+// Utiliser un useContext pour gérer l'envoi des messages avant d'utiliser ChatProvider 
